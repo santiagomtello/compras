@@ -56,14 +56,10 @@ public class ProductoController {
 
     @DeleteMapping("/{idProducto}")
     public ResponseEntity<?> delete(@PathVariable int idProducto) {
-        Optional<Producto> productoOptional = productoService.findById(idProducto); // Primero buscar si existe el
-                                                                                    // producto
-
+        Optional<Producto> productoOptional = productoService.findById(idProducto);
         if (!productoOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Producto no encontrado");
         }
-
-        // Si el producto existe, intentar eliminarlo
         Optional<Producto> productoEliminado = productoService.delete(idProducto);
         if (productoEliminado.isPresent()) {
             return ResponseEntity.ok(productoEliminado.orElseThrow());

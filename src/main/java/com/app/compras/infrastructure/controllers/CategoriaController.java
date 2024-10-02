@@ -56,10 +56,14 @@ public class CategoriaController {
 
     @DeleteMapping("/{idCategoria}")
     public ResponseEntity<?> delete(@PathVariable int idCategoria) {
-        Optional<Categoria> categoriaOptional = categoriaService.delete(idCategoria);
-        if (categoriaOptional.isPresent()) {
-            return ResponseEntity.ok(categoriaOptional.orElseThrow());
+        Optional<Categoria> categoriaOptional = categoriaService.findById(idCategoria);
+        if (!categoriaOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria no encontrada");
         }
-        return ResponseEntity.notFound().build();
+        Optional<Categoria> categoriaEliminado = categoriaService.delete(idCategoria);
+        if (categoriaEliminado.isPresent()) {
+            return ResponseEntity.ok(categoriaEliminado.orElseThrow());
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar la categoria");
     }
 }
