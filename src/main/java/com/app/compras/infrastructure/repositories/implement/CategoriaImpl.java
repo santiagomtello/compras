@@ -17,7 +17,7 @@ public class CategoriaImpl implements ICategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public Optional<Categoria> delete(int idCategoria) {
         Optional<Categoria> categoriaOp = categoriaRepository.findById(idCategoria);

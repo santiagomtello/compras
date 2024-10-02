@@ -58,12 +58,13 @@ public class CategoriaController {
     public ResponseEntity<?> delete(@PathVariable int idCategoria) {
         Optional<Categoria> categoriaOptional = categoriaService.findById(idCategoria);
         if (!categoriaOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria no encontrada");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria no encontrado");
         }
         Optional<Categoria> categoriaEliminado = categoriaService.delete(idCategoria);
         if (categoriaEliminado.isPresent()) {
             return ResponseEntity.ok(categoriaEliminado.orElseThrow());
         }
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar la categoria");
     }
 }
