@@ -2,6 +2,8 @@ package com.app.compras.domain.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +17,7 @@ import lombok.Data;
 @Data
 public class Cliente {
     @Id
-    @Column(length = 20, nullable = false)
+    @Column(length = 30, nullable = false)
     private String id;
 
     @Column(length = 40, nullable = false)
@@ -24,15 +26,16 @@ public class Cliente {
     @Column(length = 40, nullable = false)
     private String apellido;
 
-    @Column(length = 10, nullable = false)
-    private int celular;
+    @Column(nullable = false)
+    private Long celular;
 
-    @Column(length = 80, nullable = false)
+    @Column(length = 200, nullable = false)
     private String direccion;
 
-    @Column(name = "correo_electronico", length = 70, nullable = true)
+    @Column(name = "correo_electronico", length = 100, nullable = true)
     private String correoElectronico;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Compra> compra;
 }

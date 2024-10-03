@@ -17,7 +17,7 @@ public class CompraImpl implements ICompraService{
     @Autowired
     private CompraRepository compraRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public Optional<Compra> delete(int idCompra) {
         Optional<Compra> compraOp = compraRepository.findById(idCompra);

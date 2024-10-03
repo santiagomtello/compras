@@ -3,8 +3,6 @@ package com.app.compras.domain.entity;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,9 +25,8 @@ public class Compra {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
 
-    @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false ,name = "medio_pago")
-    private MedioPago medioPago;
+    private String medioPago;
 
     @Column(length = 100, nullable = true)
     private String comentario;

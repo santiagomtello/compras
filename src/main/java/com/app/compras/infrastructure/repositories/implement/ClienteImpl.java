@@ -17,10 +17,10 @@ public class ClienteImpl implements IClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
-    public Optional<Cliente> delete(String idCliente) {
-        Optional<Cliente> clienteOp = clienteRepository.findById(idCliente);
+    public Optional<Cliente> delete(String id) {
+        Optional<Cliente> clienteOp = clienteRepository.findById(id);
         clienteOp.ifPresent(clienteDb -> {
             clienteRepository.delete(clienteDb);
         });
@@ -35,8 +35,8 @@ public class ClienteImpl implements IClienteService {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Cliente> findById(String idCliente) {
-        return clienteRepository.findById(idCliente);
+    public Optional<Cliente> findById(String id) {
+        return clienteRepository.findById(id);
     }
 
     @Transactional
@@ -47,8 +47,8 @@ public class ClienteImpl implements IClienteService {
 
     @Transactional
     @Override
-    public Optional<Cliente> update(String idCliente, Cliente cliente) {
-        Optional<Cliente> clienteOld = clienteRepository.findById(idCliente);
+    public Optional<Cliente> update(String id, Cliente cliente) {
+        Optional<Cliente> clienteOld = clienteRepository.findById(id);
         if (clienteOld.isPresent()) {
             Cliente clienteDb = clienteOld.orElseThrow();
             clienteDb.setNombre(cliente.getNombre());
