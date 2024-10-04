@@ -9,9 +9,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "compras_productos")
+@Data
 public class CompraProducto {
     @EmbeddedId
     private CompraProductoId id;
